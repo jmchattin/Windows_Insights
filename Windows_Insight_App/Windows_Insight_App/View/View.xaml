@@ -1,0 +1,413 @@
+﻿<Window x:Class="Windows_Insight_App.View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Windows_Insight_App"
+        Height="280" Width="455" Title="{Binding windowTitle}"
+        SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <!--Topmost="True"-->
+    <TabControl Name="TabsControl" TabStripPlacement="Top" BorderBrush="Blue">
+        <TabItem Header="Main" IsSelected="True">
+            <StackPanel Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="OneBtn" Content="{Binding oneContent, Mode=TwoWay}" Width="80"
+                            HorizontalAlignment="Center"
+                            Grid.Column="1" Grid.Row="1"
+                            Visibility="{Binding oneVisible}"
+                            Command="{Binding buttonCmd}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                    <Button x:Name="TwoBtn" Content="{Binding twoContent, Mode=OneWay}" Width="80"
+                            HorizontalAlignment="Center"
+                            Grid.Column="3" Grid.Row="1"
+                            Visibility="{Binding twoVisible}"
+                            Command="{Binding buttonCmd}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                    <Button x:Name="ThreeBtn" Content="{Binding threeContent, Mode=OneWay}" Width="80"
+                            HorizontalAlignment="Center"
+                            Grid.Column="5" Grid.Row="1"
+                            Visibility="{Binding threeVisible}"
+                            Command="{Binding buttonCmd}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                    <Button x:Name="FourBtn" Content="{Binding fourContent, Mode=OneWay}" Width="80"
+                            HorizontalAlignment="Center"
+                            Grid.Column="7" Grid.Row="1"
+                            Visibility="{Binding fourVisible}"
+                            Command="{Binding buttonCmd}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="45"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="45"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <!-- XY -->
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Width:" HorizontalAlignment="Left" VerticalAlignment="Top"
+                           Grid.Column="1" Grid.Row="0"/>
+                    <TextBox x:Name="Width" Text="{Binding width, Mode=TwoWay}"
+                             HorizontalAlignment="Left" VerticalAlignment="Center" Width="60"
+                             Grid.Column="2" Grid.Row="0" MaxLength="5"/>
+                    <Label Content="Height:" HorizontalAlignment="Left" VerticalAlignment="Top"
+                           Grid.Column="4" Grid.Row="0"/>
+                    <!--UpdateSourceTrigger=PropertyChanged}-->
+                    <TextBox x:Name="Height" Text="{Binding height, Mode=TwoWay}"
+                             HorizontalAlignment="Left" VerticalAlignment="Center" Width="60"
+                             Grid.Column="5" Grid.Row="0" MaxLength="5"/>
+                    <Button x:Name="SetDimensions" Content="Update W/H" HorizontalAlignment="Left" VerticalAlignment="Center"
+                            Grid.Column="7" Grid.Row="0"
+                            Command="{Binding buttonCmd}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+
+                    <!-- Section needs to be rearranged before being enabled. -->
+                    <Label Content="X" HorizontalAlignment="Left" VerticalAlignment="Top"
+                           Grid.Column="8" Grid.Row="0" IsEnabled="False" Visibility="Hidden"/>
+                    <TextBox x:Name="Xpos" Text="000" HorizontalAlignment="Left" VerticalAlignment="Center"
+                             MaxWidth="25"
+                             Grid.Column="8" Grid.Row="0" IsEnabled="False" Visibility="Hidden"/>
+                    <!--TextChanged="Xpos_TextChanged"-->
+                    <Label Content="Y" HorizontalAlignment="Left" VerticalAlignment="Top"
+                           Grid.Column="8" Grid.Row="0" IsEnabled="False" Visibility="Hidden"/>
+                    <TextBox x:Name="Ypos" Text="000" HorizontalAlignment="Left" VerticalAlignment="Center"
+                             MaxWidth="25"
+                             Grid.Column="8" Grid.Row="0" IsEnabled="False" Visibility="Hidden"/>
+                    <!--TextChanged="Ypos_TextChanged"-->
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Auto-update W/H?" Grid.Column="1" Grid.Row="0"/>
+                    <CheckBox x:Name="WHcb" IsChecked="{Binding whCBChecked}"
+                              VerticalAlignment="Center" HorizontalAlignment="Center"
+                              Grid.Column="2" Grid.Row="0"
+                              Command="{Binding checkboxCmd}"
+                              CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                    <Label x:Name="WHLbl" Grid.Column="4" Grid.Row="0" Content="{Binding whContent, Mode=OneWay}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="45"/>
+                        <ColumnDefinition Width="245"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="ManNameLbl" HorizontalAlignment="Left"
+                           Content="Name: " VerticalAlignment="Bottom" Width="90"
+                           Grid.Column="1" Grid.Row="0"/>
+                    <TextBox x:Name="ManNameTB" HorizontalAlignment="Left"
+                             Width="245" VerticalAlignment="Center"
+                             Grid.Column="2" Grid.Row="0"
+                             Text="{Binding manualName, Mode=TwoWay}"/>
+                    <Button x:Name="ManBtn" Content="Update" Width="70"
+                            Visibility="Visible" IsEnabled="True"
+                            Grid.Column="4" Grid.Row="0"
+                            Command="{Binding buttonCmd}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                    <Label x:Name="ManTitleLbl" HorizontalAlignment="Left"
+                           Content="Title: "
+                           VerticalAlignment="Bottom" Width="90"
+                           Grid.Column="1" Grid.Row="1"/>
+                    <TextBox x:Name="ManTitleTB" HorizontalAlignment="Left"
+                             VerticalAlignment="Center" Width="245"
+                             Grid.Column="2" Grid.Row="1"
+                             Text="{Binding manualTitle, Mode=TwoWay}"/>
+                    <Button x:Name="CapBtn" Content="Screenshot" Width="70"
+                            Visibility="Visible"
+                            Grid.Column="4" Grid.Row="1"
+                            Command="{Binding buttonCmd}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                    <!--IsEnabled="{Binding capEnabled}"-->
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Expander Grid.Column="1" Grid.Row="0"
+                              Header="Running Processes" IsExpanded="True">
+                        <ListView ItemsSource="{Binding trimmedProcesses, Mode=OneWay}"
+                                  MaxHeight="200" ScrollViewer.CanContentScroll="True"
+                                  SelectedIndex="{Binding sIndex, Mode=OneWayToSource}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="#" Width="auto">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding num, Mode=OneWay}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Name" Width="auto">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding name, Mode=OneWay}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Title" Width="255">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding title, Mode=OneWay}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+
+                        </ListView>
+                        <!--</StackPanel>-->
+                    </Expander>
+                </Grid>
+            </StackPanel>
+        </TabItem>
+
+        <TabItem Header="Diagnostics" Height="22" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="1" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Right">Process:</Label>
+                    <Label Grid.Column="2" Grid.Row="1" Name="ProcessLbl" Content="{Binding processPerf}"/>
+                    <Label Grid.Column="1" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Right">CPU Time:</Label>
+                    <Label Grid.Column="2" Grid.Row="2" Name="CPULbl" Content="{Binding cpuPerf}"/>
+                    <Label Grid.Column="1" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right">RAM:</Label>
+                    <Label Grid.Column="2" Grid.Row="3" Name="RAMLbl" Content="{Binding ramPerf}"/>
+                    <Label Grid.Column="1" Grid.Row="4" FontWeight="Bold" HorizontalAlignment="Right">Sys. Open RAM:</Label>
+                    <Label Grid.Column="2" Grid.Row="4" Name="TRamLbl" Content="{Binding tramPerf}"/>
+                    <Label Grid.Column="1" Grid.Row="5" FontWeight="Bold" HorizontalAlignment="Right">Network Use:</Label>
+                    <Label Grid.Column="2" Grid.Row="5" Name="NetLbl" Content="{Binding netPerf}"/>
+                </Grid>
+                <Grid Visibility="Hidden" IsEnabled="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <ListView Grid.Column="0" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Time" Width="40">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label/>
+                                            <!-- Still need Source= -->
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="CPU" Width="40">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label/>
+                                            <!-- Still need Source= -->
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="RAM" Width="40">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label/>
+                                            <!-- Still need Source= -->
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Settings (WIP)" IsEnabled="False" Visibility="Hidden">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                    <!--<RowDefinition Height="20"/>-->
+                </Grid.RowDefinitions>
+                <TabControl Name="SetTabsControl" TabStripPlacement="Top" BorderBrush="Blue"
+                                Grid.Column="1" Grid.Row="2" Margin="0,-21,0,0">
+                    <TabItem Header="Screenshots" IsSelected="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="75"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Save to:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ScrLocTB" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5"
+                                     IsEnabled="False"/>
+                            <Label Content="Name as:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ScrNameTB" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5"
+                                     IsEnabled="False"/>
+                            <Label Content="Compress?" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
+                            <CheckBox x:Name="ScrCompcb" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,7"
+                                      IsEnabled="False"/>
+                            <Label Content="Constrain" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
+                            <CheckBox x:Name="RunConstCB" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,6"
+                                      IsChecked="{Binding runConstCBChecked, Mode=OneWayToSource}"/>
+                            <Label Content="All Procs" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center"/>
+                            <CheckBox x:Name="ShowAllCB" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,6"
+                                      Visibility="{Binding debugMode, Mode=OneTime}"
+                                      IsChecked="{Binding showAllCBChecked, Mode=OneWayToSource}"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Process Data" IsEnabled="False">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="*"/>
+                                <!--<ColumnDefinition Width="20"/>-->
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Save to:" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+                            <TextBox x:Name="ProcLocTB" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Margin="0,5"/>
+                            <Label Content="Name as:" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"/>
+                            <TextBox x:Name="ProcNameTB" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Margin="0,5"/>
+                            <Label Margin="0,1" Content="Same location as Screenshots?" Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="3"/>
+                            <CheckBox x:Name="ProcSamecb" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center"
+                                      Margin="100,6,0,6"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Speed Buttons">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Display Name" Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                            <Label Content="Process Name" Grid.Column="3" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                            <Label Content="Process Title" Grid.Column="5" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                            <Label Content="1:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+                            <TextBox x:Name="BName1TB" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"
+                                     Text="{Binding oneContent, Mode=TwoWay}"/>
+                            <TextBox x:Name="PName1TB" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"
+                                     Text="{Binding oneProcName, Mode=TwoWay}"/>
+                            <TextBox x:Name="PTitle1TB" Grid.Column="5" Grid.Row="2" VerticalAlignment="Center"
+                                     Text="{Binding oneProcTitle, Mode=TwoWay}"/>
+                            <Label Content="2:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
+                            <TextBox x:Name="BName2TB" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"
+                                     Text="{Binding twoContent, Mode=TwoWay}"/>
+                            <TextBox x:Name="PName2TB" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center"
+                                     Text="{Binding twoProcName, Mode=TwoWay}"/>
+                            <TextBox x:Name="PTitle2TB" Grid.Column="5" Grid.Row="3" VerticalAlignment="Center"
+                                     Text="{Binding twoProcTitle, Mode=TwoWay}"/>
+                            <Label Content="3:" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
+                            <TextBox x:Name="BName3TB" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"
+                                     Text="{Binding threeContent, Mode=TwoWay}"/>
+                            <TextBox x:Name="PName3TB" Grid.Column="3" Grid.Row="4" VerticalAlignment="Center"
+                                     Text="{Binding threeProcName, Mode=TwoWay}"/>
+                            <TextBox x:Name="PTitle3TB" Grid.Column="5" Grid.Row="4" VerticalAlignment="Center"
+                                     Text="{Binding threeProcTitle, Mode=TwoWay}"/>
+                            <Label Content="4:" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center"/>
+                            <TextBox x:Name="BName4TB" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center"
+                                     Text="{Binding fourContent, Mode=TwoWay}"/>
+                            <TextBox x:Name="PName4TB" Grid.Column="3" Grid.Row="5" VerticalAlignment="Center"
+                                     Text="{Binding fourProcName, Mode=TwoWay}"/>
+                            <TextBox x:Name="PTitle4TB" Grid.Column="5" Grid.Row="5" VerticalAlignment="Center"
+                                     Text="{Binding fourProcTitle, Mode=TwoWay}"/>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>

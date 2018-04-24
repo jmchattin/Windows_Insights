@@ -1,0 +1,31 @@
+﻿************************************************************
+FIX ********************************************************
+************************************************************
+Make it so the W/H checkbox does not uncheck itself.
+
+
+
+************************************************************
+IMPROVE FUNCTIONALITY **************************************
+************************************************************
+Add tooltips to options to help user understand what a piece of functionality does.
+Don't allow for manual resizing of the tool's w/h dimensions.
+Optimize the layout of the SetupButtons code functionality.
+Convert speed-buttons to structs; improve the checking of what button was clicked.
+Make network/cpu usage into a percentage of total system network/cpu usage.
+Check if ProcessManager.cs can be optimized/chunked into more specialized files.
+
+
+
+************************************************************
+ADD FUNCTIONALITY ******************************************
+************************************************************
+Add save location settings for screenshots.
+Add save-name-like settings (e.g. Save name like "tool" saves "tool_1.jpg", "tool_2.jpg", etc.).
+Enable screenshot file compression.
+Add an option to turn-on the tool being always on top.
+Create performance object and listview to contain multiple performance objects (don't forget to bind the listview).
+Update performance object with process performance constantly.
+Update performance list with the performance object values every 5 seconds or so.
+Add save location settings for process performance.
+Move the 'readme' file to the project solution; copy readme file to the publish location on build.
